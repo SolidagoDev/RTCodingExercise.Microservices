@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UserSecretsId>e3a5a9d1-0ab9-4578-aec1-e3a98577a8c4</UserSecretsId>
@@ -36,8 +36,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\..\BuildingBlocks\New folder\WebHost.Customization\WebHost.Customization.csproj" />
-	  <ProjectReference Include="..\Catalog.Domain\Catalog.Domain.csproj" />
+		<ProjectReference Include="..\..\..\BuildingBlocks\EventBus\IntegrationEvents\IntegrationEvents.csproj" />
+		<ProjectReference Include="..\..\..\BuildingBlocks\New folder\WebHost.Customization\WebHost.Customization.csproj" />
+		<ProjectReference Include="..\Catalog.Domain\Catalog.Domain.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -1,34 +1,19 @@
-﻿namespace Catalog.Domain
-{
-    public enum PlateStatus
-    {
-        ForSale,
-        Reserved,
-        Sold
-    }
+using Catalog.Domain;
 
-    public class Plate
+namespace Catalog.API.ViewModels
+{
+    public class PlateDto
     {
         public Guid Id { get; set; }
-
         public string? Registration { get; set; }
-
         public decimal PurchasePrice { get; set; }
-
         public decimal SalePrice { get; set; }
-
+        public PlateStatus Status { get; set; }
         public string? Letters { get; set; }
-
         public int Numbers { get; set; }
-
-        public PlateStatus Status { get; set; } = PlateStatus.ForSale;
-
         public DateTime? ReservedAt { get; set; }
-
         public DateTime? SoldAt { get; set; }
-
         public string? ReservedBy { get; set; }
-
         public string? SoldTo { get; set; }
     }
 }

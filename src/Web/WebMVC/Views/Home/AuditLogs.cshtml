@@ -1,0 +1,14 @@
+@{
+    ViewData["Title"] = "Audit Logs";
+    var logs = ViewBag.AuditLogs as string;
+}
+<h2 class="mb-4">Audit Logs</h2>
+@if (!string.IsNullOrEmpty(logs))
+{
+    <pre class="bg-light p-3 border rounded">@logs</pre>
+}
+else
+{
+    <div class="alert alert-info">No audit logs found.</div>
+}
+<a asp-action="Index" class="btn btn-secondary mt-3">Back to List</a>

@@ -1,5 +1,8 @@
 ﻿using MassTransit;
+using Microsoft.AspNetCore.Localization;
 using RabbitMQ.Client;
+using System.Globalization;
+using WebMVC.Services;
 
 namespace RTCodingExercise.WebMVC
 {
@@ -18,6 +21,8 @@ namespace RTCodingExercise.WebMVC
             services.AddControllers();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages().AddRazorRuntimeCompilation();
+
+            services.AddHttpClient<ICatalogService, CatalogService>();
 
             services.AddMassTransit(x =>
             {
@@ -59,6 +64,27 @@ namespace RTCodingExercise.WebMVC
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            // This sets up culture info
+            var enGbCulture = new CultureInfo("en-GB");
+            var localizationOptions = new RequestLocalizationOptions()
+            {
+                SupportedCultures = new List<CultureInfo>()
+                {
+                    enGbCulture
+                },
+
+                SupportedUICultures = new List<CultureInfo>()
+                {
+                    enGbCulture
+                },
+                DefaultRequestCulture = new RequestCulture(enGbCulture),
+                FallBackToParentCultures = false,
+                FallBackToParentUICultures = false,
+                RequestCultureProviders = null
+            };
+
+            app.UseRequestLocalization(localizationOptions);
+
             var pathBase = Configuration["PATH_BASE"];
             if (!string.IsNullOrEmpty(pathBase))
             {
@@ -66,6 +92,14 @@ namespace RTCodingExercise.WebMVC
             }
 
             app.UseStaticFiles();
+
+            // Make work identity server redirections in Edge and lastest versions of browers. WARN: Not valid in a production environment.
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add("Content-Security-Policy", "script-src 'unsafe-inline'");
+                await next();
+            });
+
             app.UseForwardedHeaders();
             app.UseRouting();
 

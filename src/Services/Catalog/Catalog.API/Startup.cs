@@ -1,6 +1,7 @@
 ﻿using MassTransit;
 using Microsoft.OpenApi.Models;
 using RabbitMQ.Client;
+using Catalog.API.Services;
 
 namespace Catalog.API
 {
@@ -76,6 +77,7 @@ namespace Catalog.API
             });
 
             services.AddMassTransitHostedService();
+            services.AddScoped<IPlateService, PlateService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

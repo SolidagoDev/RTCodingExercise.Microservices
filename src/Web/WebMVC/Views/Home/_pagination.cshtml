@@ -1,0 +1,41 @@
+﻿@model WebMVC.ViewModels.PaginationInfo
+
+<style>
+    .is-disabled {
+        color: currentColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+        text-decoration: none;
+        pointer-events: none;
+    }
+</style>
+
+<div class="container my-3">
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(Model.Previous == "is-disabled" ? "disabled" : "")">
+                <a class="page-link" id="Previous"
+                   asp-controller="Home"
+                   asp-action="Index"
+                   asp-route-page="@(Model.ActualPage -1)"
+                   aria-label="Previous">
+                    Previous
+                </a>
+            </li>
+            <li class="page-item disabled">
+                <span class="page-link">
+                    Showing @Model.ItemsPerPage of @Model.TotalItems products - Page @(Model.ActualPage + 1) - @Model.TotalPages
+                </span>
+            </li>
+            <li class="page-item @(Model.Next == "is-disabled" ? "disabled" : "")">
+                <a class="page-link" id="Next"
+                   asp-controller="Home"
+                   asp-action="Index"
+                   asp-route-page="@(Model.ActualPage + 1)"
+                   aria-label="Next">
+                    Next
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

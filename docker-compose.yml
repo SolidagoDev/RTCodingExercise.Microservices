@@ -8,7 +8,6 @@ services:
       dockerfile: src/Web/WebMVC/Dockerfile
     depends_on:
       - sqldata
-      - catalog-api
 
   catalog-api:
     image: regtansfers/rtcodingexercise-catalogapi

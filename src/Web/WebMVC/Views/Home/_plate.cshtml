@@ -1,0 +1,35 @@
+﻿@model Catalog.Domain.Plate
+
+    <tr>
+        <td>@Model.Registration</td>
+        <td>@Model.PurchasePrice.ToString("C")</td>
+        <td>@Model.SalePrice.ToString("C")</td>
+        <td>@Model.Status</td>
+        <td>
+            @if (Model.Status == Catalog.Domain.PlateStatus.ForSale)
+            {
+                <form asp-controller="Home" asp-action="ReservePlate" method="post" class="d-inline">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <input type="text" name="reservedBy" placeholder="Reserved By" required class="form-control d-inline w-auto me-2" />
+                    <button type="submit" class="btn btn-warning btn-sm me-1">Reserve</button>
+                </form>
+                <form asp-controller="Home" asp-action="SellPlate" method="post" class="d-inline">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <input type="text" name="soldTo" placeholder="Sold To" required class="form-control d-inline w-auto me-2" />
+                    <button type="submit" class="btn btn-success btn-sm me-1">Sell</button>
+                </form>
+            }
+            else if (Model.Status == Catalog.Domain.PlateStatus.Reserved)
+            {
+                <form asp-controller="Home" asp-action="UnreservePlate" method="post" class="d-inline">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <input type="text" name="unreservedBy" placeholder="Unreserved By" required class="form-control d-inline w-auto me-2" />
+                    <button type="submit" class="btn btn-secondary btn-sm me-1">Unreserve</button>
+                </form>
+            }
+            <form asp-controller="Home" asp-action="AuditLogs" method="get" class="d-inline">
+                <input type="hidden" name="id" value="@Model.Id" />
+                <button type="submit" class="btn btn-info btn-sm">Audit Logs</button>
+            </form>
+        </td>
+    </tr>

@@ -6,7 +6,7 @@ namespace Catalog.API.Data
     {
         public async Task SeedAsync(ApplicationDbContext context, IWebHostEnvironment env, ILogger<ApplicationDbContextSeed> logger, IOptions<AppSettings> settings, int? retry = 0)
         {
-            int retryForAvaiability = retry.Value;
+            int retryForAvaiability = retry ?? 0;
 
             try
             {
@@ -31,7 +31,10 @@ namespace Catalog.API.Data
             try
             {
                 var plates = ReadApplicationRoleFromJson(env.ContentRootPath, logger);
-
+                foreach (var plate in plates)
+                {
+                    plate.Status = Catalog.Domain.PlateStatus.ForSale;
+                }
                 await context.Plates.AddRangeAsync(plates);
                 await context.SaveChangesAsync();
             }

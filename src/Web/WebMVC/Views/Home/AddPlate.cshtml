@@ -1,0 +1,25 @@
+﻿@model Catalog.Domain.Plate
+
+<form asp-controller="Home" asp-action="AddPlateSubmit" method="post" class="card p-4 shadow-sm mt-4">
+    <div class="mb-3">
+        <label asp-for="Registration" class="form-label">Registration</label>
+        <input asp-for="Registration" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="PurchasePrice" class="form-label">Purchase Price</label>
+        <input asp-for="PurchasePrice" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="SalePrice" class="form-label">Sale Price</label>
+        <input asp-for="SalePrice" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Letters" class="form-label">Letters</label>
+        <input asp-for="Letters" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Numbers" class="form-label">Numbers</label>
+        <input asp-for="Numbers" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
